@@ -1,0 +1,153 @@
+/* 공통 대시보드와 정보 카드. 사용자·API 데이터는 Python에서 HTML 이스케이프합니다. */
+.stApp {
+    background-color: #e7d0ad;
+    background-image: linear-gradient(rgb(53 31 14 / 12%), rgb(53 31 14 / 12%)), var(--autumn-background, none);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+[data-testid="stHeader"] { background: rgb(255 250 241 / 85%); }
+.stMainBlockContainer {
+    background: rgb(255 252 247 / 94%);
+    border: 1px solid rgb(255 255 255 / 70%);
+    border-radius: 24px;
+    box-shadow: 0 12px 50px rgb(69 35 14 / 14%);
+    margin-top: 24px;
+    margin-bottom: 32px;
+    color: #263341;
+}
+.stMainBlockContainer h1, .stMainBlockContainer h2, .stMainBlockContainer h3 { color: #263341; }
+.autumn-banner {
+    background-color: #714425;
+    background-image: linear-gradient(90deg, rgb(34 23 14 / 78%), rgb(34 23 14 / 10%)), var(--autumn-background, none);
+    background-size: cover;
+    background-position: center 56%;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 20px;
+    color: #fff6e7;
+}
+.autumn-banner > span { font-size: 11px; letter-spacing: .17em; color: #ffdcad; }
+.stMainBlockContainer .autumn-banner h2 { color: white; font-size: clamp(21px, 3vw, 30px); margin: 8px 0; padding: 0; }
+.autumn-banner p { font-size: 14px; color: #fff3dd; }
+.autumn-banner small { font-size: 10px; color: #ffe6c4; }
+.autumn-leaves { position: fixed; inset: 0; z-index: 999; overflow: hidden; pointer-events: none; }
+.autumn-leaf {
+    position: absolute; top: -50px; left: var(--x); width: var(--size); height: var(--size);
+    background: var(--leaf-color); opacity: .55;
+    clip-path: polygon(50% 0, 57% 26%, 78% 12%, 73% 37%, 100% 34%, 83% 56%, 96% 67%, 61% 73%, 54% 100%, 46% 100%, 48% 74%, 13% 79%, 22% 59%, 0 44%, 29% 40%, 21% 17%, 43% 28%);
+    animation: autumn-fall var(--duration) linear var(--delay) infinite;
+    will-change: transform;
+}
+@keyframes autumn-fall {
+    0% { transform: translate3d(-25px, -6vh, 0) rotate(0deg); opacity: 0; }
+    12% { opacity: .55; }
+    35% { transform: translate3d(var(--drift), 35vh, 0) rotate(130deg); }
+    65% { transform: translate3d(-25px, 68vh, 0) rotate(255deg); }
+    90% { opacity: .45; }
+    100% { transform: translate3d(var(--drift), 112vh, 0) rotate(380deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .autumn-leaf { animation: none; display: none; }
+}
+@media (max-width: 640px) {
+    .stMainBlockContainer { margin-top: 12px; padding-inline: 14px; }
+    .autumn-banner { padding: 20px; }
+    .autumn-leaf:nth-child(n+9) { display: none; }
+}
+.stMainBlockContainer { max-width: 1320px; padding-top: 2.5rem; }
+.trip-brand { color: #18756c; font-size: 12px; letter-spacing: .12em; font-weight: 800; }
+.trip-intro { color: #607387; margin: -8px 0 12px; line-height: 1.6; }
+.trip-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 8px 0 18px; }
+.trip-stat { background: #f0f7f6; border: 1px solid #d7e9e5; border-radius: 16px; padding: 18px 20px; min-width: 0; }
+.trip-stat span { display: block; color: #42645f; font-size: 12px; margin-bottom: 8px; }
+.trip-stat strong { display: block; color: #163f3a; font-size: 19px; overflow-wrap: anywhere; }
+.trip-place { background: #fff; color: #1e293b; border: 1px solid #dce5ed; border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgb(23 55 65 / 4%); }
+.trip-place-heading { display: flex; align-items: center; gap: 12px; }
+.trip-number { background: #e5f3ef; color: #19685e; width: 34px; height: 34px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 800; }
+.trip-eyebrow { display: block; color: #527269; font-size: 12px; font-weight: 600; }
+.trip-place h3, .trip-weather h3 { font-size: 18px; padding: 4px 0; margin: 0; color: #1e293b; overflow-wrap: anywhere; }
+.trip-place p { color: #506176; font-size: 14px; line-height: 1.6; }
+.trip-place-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.trip-place-meta span { padding: 5px 10px; border-radius: 8px; background: #f2f5f8; font-size: 12px; overflow-wrap: anywhere; }
+.trip-weather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin: 12px 0; }
+.trip-weather { background: #edf6ff; border: 1px solid #d5e6f7; color: #24425f; border-radius: 16px; padding: 20px; }
+.trip-temperature { color: #153956; font-size: 28px; font-weight: 800; margin: 14px 0 6px; }
+.trip-temperature small { font-size: 18px; color: #526c84; }
+.trip-weather p { font-size: 13px; color: #415d78; }
+.trip-weather footer { color: #526c84; border-top: 1px solid #d5e6f7; padding-top: 10px; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+[data-testid="stForm"] { border-radius: 18px; border-color: #d5e0e8; padding: 20px; }
+[data-testid="stDataFrame"] { border: 1px solid #dce5ed; border-radius: 12px; overflow: hidden; }
+/* 기본 입력·표·지도 버튼은 Streamlit 컴포넌트를 유지합니다. */
+.st-key-chat_thread {
+    background: #e8f0f5;
+    border: 1px solid #d5e0e8;
+    border-radius: 22px;
+    padding: 24px 20px;
+    margin: 12px 0 20px;
+}
+.st-key-chat_thread [data-testid="stChatMessage"] {
+    background: transparent;
+    padding: 6px 0 14px;
+    gap: 12px;
+    align-items: flex-start;
+}
+.st-key-chat_thread [data-testid="stChatMessageContent"] {
+    background: #ffffff;
+    color: #1e293b;
+    border-radius: 4px 18px 18px 18px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 6px rgb(28 50 70 / 6%);
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.st-key-chat_thread [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+    flex-direction: row-reverse;
+    margin-left: auto;
+    max-width: 78%;
+    width: fit-content;
+}
+.st-key-chat_thread [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+    background: #fee500;
+    border-radius: 18px 4px 18px 18px;
+    flex: 0 1 auto;
+}
+.st-key-chat_thread [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+    margin-right: auto;
+    max-width: 96%;
+}
+.st-key-chat_thread [data-testid="stChatMessageAvatarUser"],
+.st-key-chat_thread [data-testid="stChatMessageAvatarAssistant"] {
+    background: #344e65;
+    color: white;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+.st-key-chat_thread [data-testid="stCaptionContainer"] {
+    color: #526276;
+}
+.st-key-chat_thread [data-testid="stMarkdownContainer"] p,
+.st-key-chat_thread [data-testid="stText"] {
+    color: #1e293b;
+    line-height: 1.65;
+}
+.st-key-chat_thread [data-testid="stExpander"] {
+    background: #f8fafc;
+    color: #1e293b;
+    border-radius: 10px;
+}
+[data-testid="stForm"]:has(textarea[aria-label="질문"]) {
+    border-radius: 18px;
+    border-color: #d5e0e8;
+}
+@media (max-width: 640px) {
+    .trip-summary { grid-template-columns: 1fr; gap: 8px; }
+    .trip-stat { padding: 12px 16px; }
+    .trip-stat strong { font-size: 17px; }
+    .trip-place, .trip-weather { padding: 15px; }
+    .st-key-chat_thread { padding: 14px 8px; border-radius: 16px; }
+    .st-key-chat_thread [data-testid="stChatMessage"] { gap: 6px; }
+    .st-key-chat_thread [data-testid="stChatMessageContent"] { padding: 12px 10px; }
+    .st-key-chat_thread [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) { max-width: 92%; }
+    .st-key-chat_thread [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) { max-width: 100%; }
+}
